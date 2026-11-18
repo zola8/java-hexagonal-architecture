@@ -3,4 +3,25 @@ spring:
     name: payments
   mvc:
     problemdetails:
-      enabled: true    # RFC-7807 bodies for validation errors
+      enabled: true
+
+springdoc:
+  paths-to-match: /api/**
+  packages-to-scan: com.example.payments.adapter.in.rest   # only the adapter is ever scanned
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
