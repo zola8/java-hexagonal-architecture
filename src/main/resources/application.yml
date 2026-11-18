@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: payments
+  mvc:
+    problemdetails:
+      enabled: true    # RFC-7807 bodies for validation errors
