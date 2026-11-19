@@ -40,3 +40,5 @@ build/
 
 .idea/
 .mvn/
+.env
+application-local.yml

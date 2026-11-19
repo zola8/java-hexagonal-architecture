@@ -1,25 +1,44 @@
 spring:
   application:
     name: payments
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/payments
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:}
+    hikari:
+      maximum-pool-size: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: validate        # never let Hibernate invent/alter tables
+    open-in-view: false         # no lazy loading in the view layer
+    show-sql: true              # dev only
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
   mvc:
     problemdetails:
       enabled: true
 
 springdoc:
   paths-to-match: /api/**
-  packages-to-scan: com.example.payments.adapter.in.rest   # only the adapter is ever scanned
-  api-docs:
-    path: /v3/api-docs
+  packages-to-scan: com.example.payments.adapter.in.rest
   swagger-ui:
     path: /swagger-ui.html
-    operations-sorter: method
-    tags-sorter: alpha
 
 ---
 spring:
   config:
     activate:
       on-profile: prod
+  jpa:
+    show-sql: false
 springdoc:
   api-docs:
     enabled: false
