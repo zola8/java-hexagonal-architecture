@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-@Component
+//@Component
 public class InMemoryPaymentRepository implements PaymentRepository {
 
     private final ConcurrentMap<String, Payment> store = new ConcurrentHashMap<>();

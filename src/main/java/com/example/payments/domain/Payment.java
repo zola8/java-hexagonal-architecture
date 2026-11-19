@@ -28,14 +28,27 @@ public class Payment {
             throw new IllegalArgumentException("amount must be positive");
         if (currency == null || currency.length() != 3)
             throw new IllegalArgumentException("currency must be a 3-letter code");
-        return new Payment(UUID.randomUUID().toString(), orderId, amount,
-            currency.toUpperCase(), Status.PENDING);
+        return new Payment(
+            UUID.randomUUID().toString(),
+            orderId,
+            amount,
+            currency.toUpperCase(),
+            Status.PENDING
+        );
     }
 
     public void complete() {
         if (status != Status.PENDING)
             throw new IllegalStateException("payment " + id + " is already " + status);
         this.status = Status.COMPLETED;
+    }
+
+    /**
+     * Rebuilds an existing payment from storage. No validation — it was validated on creation.
+     */
+    public static Payment restore(String id, String orderId, BigDecimal amount,
+                                  String currency, Status status) {
+        return new Payment(id, orderId, amount, currency, status);
     }
 
     public String getId() {
